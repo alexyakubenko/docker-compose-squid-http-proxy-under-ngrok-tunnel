@@ -1,0 +1,14 @@
+version: "3.4"
+services:
+  squid:
+    build: ./squid
+    ports:
+      - 3128:3128
+  ngrok:
+    image: wernight/ngrok
+    links:
+      - squid:squid
+    ports:
+      - 4040:4040
+    command: ngrok http squid:3128
+
